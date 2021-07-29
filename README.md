@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Backend Assessment - T10
+  Backend Assessment - Pi Lab
 </h3>
 
 
@@ -38,15 +38,18 @@
 
 ## 👨🏻‍💻 Challenge
 
-A financial institution hired the services of T10 seeking greater data agility through the metrification of processes that, until then, were not observed (correctly). One of the processes is to request the automatic debit product from partner companies. The operation is performed manually and will be automated by this service, which will allow other services to freely consume their operational events.
+This api provides almost everything needed to organize personal balance of deposit and withdraw.
+
+Customers can choose to register between outcome or income money and can see all the registers made.
+
 
 
 ## 💻 Getting started
 
 ### Requirements
 
-- [Python3](https://www.python.org/)
-- [Virtualenv](https://virtualenv.pypa.io/en/latest/index.html)
+- [Yarn](https://yarnpkg.com/)
+- [Node](https://nodejs.org/en/)
 - [Docker](https://docs.docker.com/engine/install/)
 
 
@@ -54,52 +57,36 @@ A financial institution hired the services of T10 seeking greater data agility t
 **Clone the project and access the folder**
 
 ```bash
-$ git clone https://github.com/paulohenriquerosa/teste-t10.git && cd teste-t10
+$ git clone https://github.com/paulohenriquerosa/piLab-assessment.git && cd piLab-assessment
 ```
 
 **Follow the steps below**
 
 ```bash
-# Create a Virtual environment
-$ virtualenv .venv
-
-# Enable the virtual environment
-$ source .venv/bin/activate
-
-# Setup app folder to become a package and install all dependecies
-$ pip install -e .
-
-# Disable and enable the virtual environment for load the changes
-$ deactivate && source .venv/bin/activate
+# Install all dependencies
+$ yarn
 
 # Create the instance of postgreSQL using docker
-$ docker run --name t10_database \
+$ docker run --name piLab \
+             -e POSTGRES_USER=docker \
              -e POSTGRES_PASSWORD=docker \
+             -e POSTGRES_DB=piLab_database \
              -p 5432:5432 -d postgres
 
-
-# Access the principal file
-$ cd app/shared/infra/http
-
-# To finish, run the api service
-$ uvicorn main:app --reload
+# To finish, run the api
+$ yarn dev
 
 # Well done, project is started!
 ```
 
-To run the tests, in the `root folder` run the following command:
+To run the tests, run the following command:
 ```bash
-$ pytest
+$ yarn test
 ```
 ## 📝  Routes 
 
-To see the routes available in the api just type the following link in your browser.
-
-```bash
-$ http://localhost:8000/docs
-```
-In this link you will see the resources that you can access, as well as the parameters and responses for each route.
-
 To request the available routes you can use the REST Client [Insominia](https://insomnia.rest/) and import the `Insomnia.json` file that is in the repository
+
+**obs**: This api uses authentication Json Web Token (JWT) and the token most be sent in request header.
 
 ---
